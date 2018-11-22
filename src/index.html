@@ -10,10 +10,7 @@
     <title>G-Tour</title>
     <style>
         .modal-dialog{
-            position: sticky;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%,-50%) !important;
+            position: relative;
         }
         
         button:focus{
@@ -48,22 +45,22 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>Login</h4>
-                    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                    <button type="button" class="close" onclick="clearLogin()"> &times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label class="sr-only" for="email">Email</label>
-                            <input type="text" class="form-control input-sm" placeholder="Email" id="email" name="email">
+                            &nbspEmail<br>
+                            <input type="text" class="form-control input-sm" placeholder="Email" id="emailL" name="email">
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="password">Password</label>
-                            <input type="password" class="form-control input-sm" placeholder="Password" id="password"
+                            &nbspPassword<br>
+                            <input type="password" class="form-control input-sm" placeholder="Password" id="passwordL"
                                 name="password">
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-xs">Login</button>
-                            <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary btn-xs" onclick="goToRegis()" >Register</button>
                         </div>
                     </form>
                 </div>
@@ -76,27 +73,27 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4>Registration</h4>
-                    <button type="button" class="close" data-dismiss="modal"> &times;</button>
+                    <button type="button" class="close" onclick="clearRegis()"> &times;</button>
                 </div>
                 <div class="modal-body">
                     <form>
                         <div class="form-group">
-                            <label class="sr-only" for="email">Email</label>
+                            &nbspEmail<br>
                             <input type="text" class="form-control input-sm" placeholder="Email" id="email" name="email">
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="password">Password</label>
+                            &nbspPassword<br>
                             <input type="password" class="form-control input-sm" placeholder="Password" id="password"
                                 name="password">
                         </div>
                         <div class="form-group">
-                            <label class="sr-only" for="password">Confirm Password</label>
+                            &nbspConfirm Password<br>
                             <input type="password" class="form-control input-sm" placeholder="Confirm Password" id="confirmPassword"
                                 name="confirmPassword">
                         </div>
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary btn-xs">Register</button>
-                            <button type="button" class="btn btn-primary btn-xs" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary btn-xs" onclick="clearRegis()">Cancel</button>
                         </div>
                     </form>
                 </div>
@@ -135,6 +132,25 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+    <script>
+        function clearLogin(){
+            $("#loginModal").modal("hide")
+            document.getElementById('emailL').value = ''
+            document.getElementById('passwordL').value = ''
+        }
+        function goToRegis(){
+            $("#loginModal").modal("hide")
+            document.getElementById('emailL').value = ''
+            document.getElementById('passwordL').value = ''
+            $("#registerModal").modal("show")
+        }
+        function clearRegis(){
+            $("#registerModal").modal("hide")
+            document.getElementById('email').value = ''
+            document.getElementById('password').value = ''
+            document.getElementById('confirmPassword').value = ''
+        }
+    </script>
 </body>
 
 </html>
