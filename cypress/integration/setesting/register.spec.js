@@ -17,10 +17,6 @@ describe('Register Integration Test', function() {
     cy.visit('/src/index.html')
     cy.get('#registerLink').click()
   })
-  it('is title "Document"', function() {
-    cy.title().should('eq', 'Document')
-    
-  })
   it(`is email ${registerValidData['email']} valid ?`, ()=> {
 
     cy.get('#email').type(registerValidData['email'])
