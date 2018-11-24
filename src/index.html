@@ -20,6 +20,7 @@
             outline:none;
         }
     </style>
+    
 </head>
 
 <body>
@@ -37,7 +38,7 @@
                         <a class="nav-link" href="#">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="cursor: pointer" data-toggle="modal" data-target="#registerModal">Register</a>
+                        <a id="registerLink" class="nav-link" style="cursor: pointer" data-toggle="modal" data-target="#registerModal">Register</a>
                     </li>
                 </ul>
             </div>
@@ -106,6 +107,28 @@
         crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBiv26PlsiCv3Uu7v-Ff6cR__TC6SHSjQA",
+        authDomain: "setesting-6099e.firebaseapp.com",
+        databaseURL: "https://setesting-6099e.firebaseio.com",
+        projectId: "setesting-6099e",
+        storageBucket: "setesting-6099e.appspot.com",
+        messagingSenderId: "185553674256"
+    };
+    firebase.initializeApp(config);
+    </script>
+    
+    <script src="./scripts/api.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            
+        })
+    </script>
 </body>
 
 </html>
