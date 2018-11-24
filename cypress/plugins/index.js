@@ -11,12 +11,4 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const api = require('../../src/scripts/api.js')
-
-module.exports = (on, config) => {
-  on('task', {
-    'defaults:api': () => {
-      return api;
-    }
-  })
-}
+module.exports = (on, config) => {};
