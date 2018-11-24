@@ -34,8 +34,7 @@ describe('Register Integration Test', function() {
   })
 
   it('is password and confirm password equal ?', ()=> {
-    let password;
-    let confirmPassword;
+
     cy.get('#password').type(registerValidData['password'])
     cy.get('#confirmPassword').type(registerValidData['confirmPassword'])
     cy.get('#password').invoke('val').then(val=> {
