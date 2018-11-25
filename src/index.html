@@ -10,13 +10,10 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
-    <title>Home</title>
+    <title>G-Tour</title>
     <style>
       .modal-dialog {
-        position: sticky;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) !important;
+        position: relative;
       }
 
       button:focus {
@@ -45,6 +42,17 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a
+                id="cTeamShow"
+                class="nav-link"
+                style="cursor: pointer"
+                data-toggle="modal"
+                data-target="#createTeamModal"
+                >Create Team</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                id="loginShow"
                 class="nav-link"
                 style="cursor: pointer"
                 data-toggle="modal"
@@ -64,11 +72,22 @@
             </li>
             <li class="nav-item">
               <a
+                id="userNameShow"
                 class="nav-link"
                 style="cursor: pointer"
                 data-toggle="modal"
-                data-target="#createTeamModal"
-                >Create Team</a
+                data-target="#userModal"
+              ></a>
+            </li>
+            <li class="nav-item">
+              <a
+                id="logoutShow"
+                class="nav-link"
+                style="cursor: pointer"
+                data-toggle="modal"
+                data-target="#logoutModal"
+                onclick="logout()"
+                >Logout</a
               >
             </li>
           </ul>
@@ -80,12 +99,12 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4>Login</h4>
-            <button type="button" class="close" data-dismiss="modal">
+            <button type="button" class="close" onclick="clearLogin()">
               &times;
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="post" id="loginForm">
               <div class="form-group">
                 <label class="sr-only" for="email">Email</label>
                 <input
@@ -113,9 +132,9 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-xs"
-                  data-dismiss="modal"
+                  onclick="goToRegis()"
                 >
-                  Cancel
+                  Register
                 </button>
               </div>
             </form>
@@ -129,7 +148,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4>Registeration</h4>
-            <button type="button" class="close" data-dismiss="modal">
+            <button type="button" class="close" onclick="clearRegis()">
               &times;
             </button>
           </div>
@@ -182,7 +201,7 @@
                 <button
                   type="button"
                   class="btn btn-primary btn-xs"
-                  data-dismiss="modal"
+                  onclick="clearRegis()"
                 >
                   Cancel
                 </button>
@@ -340,7 +359,6 @@
         messagingSenderId: "992644802636"
       };
       firebase.initializeApp(config);
-      var database = firebase.database();
     </script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -367,6 +385,37 @@
           return false;
         });
       });
+    </script>
+
+    <script>
+      $(document).ready(function() {
+        $("#loginForm").submit(function(e) {
+          e.preventDefault();
+          login();
+          return false;
+        });
+      });
+    </script>
+
+    <script>
+      function clearLogin() {
+        $("#loginModal").modal("hide");
+        document.getElementById("login_email").value = "";
+        document.getElementById("login_password").value = "";
+      }
+      function goToRegis() {
+        $("#loginModal").modal("hide");
+        document.getElementById("login_email").value = "";
+        document.getElementById("login_password").value = "";
+        $("#registerModal").modal("show");
+      }
+      function clearRegis() {
+        $("#registerModal").modal("hide");
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirmPassword").value = "";
+        document.getElementById("nickname").value = "";
+      }
     </script>
   </body>
 </html>
