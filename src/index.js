@@ -34,6 +34,10 @@ function register(e) {
   var confirmPassword = document.getElementById("confirmPassword").value;
   var nickname = document.getElementById("nickname").value;
   $("#registerModal").modal("hide");
+  document.getElementById('email').value = '';
+  document.getElementById('password').value = '';
+  document.getElementById('confirmPassword').value = '';
+  document.getElementById('nickname').value = '';
   if (password === confirmPassword) {
     firebase
       .auth()
@@ -69,6 +73,8 @@ function login(){
   var email = document.getElementById("login_email").value;
   var password = document.getElementById("login_password").value;
   $("#loginModal").modal("hide");
+  document.getElementById('login_email').value = '';
+  document.getElementById('login_password').value = '';
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
