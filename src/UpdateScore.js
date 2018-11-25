@@ -4,6 +4,9 @@ var promises = [];
 var promises2 = [];
 var htmlText = '';
 
+var teamName = [];
+var score = [];
+
 function showScoretoUpdate() {
   db.collection("Competition")
     .doc("A1qDn5cGZMsT3upqRazI")
@@ -45,4 +48,10 @@ function showScoretoUpdate() {
         $("#scoreBoard").html(htmlText);
       })
     });
+<<<<<<< HEAD
 }
+=======
+}
+
+$("#score1").val(455);
+>>>>>>> 346449a79859426bd16bb073cbce815aac6ba19f
