@@ -33,6 +33,7 @@ function register(e) {
   var password = document.getElementById("password").value;
   var confirmPassword = document.getElementById("confirmPassword").value;
   var nickname = document.getElementById("nickname").value;
+  $("#registerModal").modal("hide");
   if (password === confirmPassword) {
     firebase
       .auth()
@@ -67,6 +68,7 @@ function register(e) {
 function login(){
   var email = document.getElementById("login_email").value;
   var password = document.getElementById("login_password").value;
+  $("#loginModal").modal("hide");
   firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
