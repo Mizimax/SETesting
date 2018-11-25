@@ -2,6 +2,9 @@ const db = firebase.firestore();
 
 var promises = [];
 
+var teamName = [];
+var score = [];
+
 function showScoretoUpdate() {
   db.collection("Competition")
     .doc("A1qDn5cGZMsT3upqRazI")
@@ -18,26 +21,21 @@ function showScoretoUpdate() {
           <ul class="navbar-nav ml-auto">
           `;
           matchDataa.Teams.forEach(team => {
-            var score = team.Score;
+            score.push(team.Score);
             promises.push(
               team.TeamID.get().then(teamRef => {
                 var teamRefData = teamRef.data();
-                console.log(teamRefData.TeamName);
-                htmlText += `
-                <li class="nav-item">
-                    <a class="nav-link" id="updateScore" style="cursor: pointer">${
-                      teamRefData.TeamName
-                    }</a>
-                </li>
-                `;
+                teamName.push(teamRefData.TeamName);
               })
             );
           });
           Promise.all(promises).then(() => {
-            htmlText += `</ul>`;
-            $("#maxang").html(htmlText);
+            console.log(teamName);
+            console.log(score);
           });
         });
       });
     });
 }
+
+$("#score1").val(455);
