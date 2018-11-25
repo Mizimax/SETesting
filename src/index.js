@@ -45,17 +45,11 @@ function register(e) {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(function(docRef) {
-        db.collection("Settings")
-          .doc("UserRole")
-          .get()
-          .then(function(doc) {
-            var data = doc.data();
-            db.collection("UserInfo")
-              .doc(docRef.user.uid)
-              .set({
-                Nickname: nickname,
-                Role: data["Default"]
-              });
+        db.collection("UserInfo")
+          .doc(docRef.user.uid)
+          .set({
+            Nickname: nickname,
+            Role: "User"
           });
       })
       .catch(function(error) {
