@@ -2,7 +2,7 @@ const db = firebase.firestore();
 
 var promises = [];
 var promises2 = [];
-var htmlText = '';
+var htmlText = "";
 
 var teamName = [];
 var score = [];
@@ -28,9 +28,7 @@ function showScoretoUpdate() {
                   var teamRefData = teamRef.data();
                   console.log(teamRefData.TeamName);
                   htmlText += `
-                ${
-                      teamRefData.TeamName
-                    }
+                ${teamRefData.TeamName}
                     <input type="text" id="${team.TeamID}" value="${score}">
                     
                 `;
@@ -46,12 +44,6 @@ function showScoretoUpdate() {
       Promise.all(promises2).then(() => {
         htmlText += `<button type="submit" class="btn btn-primary btn-xs"></form>`;
         $("#scoreBoard").html(htmlText);
-      })
+      });
     });
-<<<<<<< HEAD
 }
-=======
-}
-
-$("#score1").val(455);
->>>>>>> 346449a79859426bd16bb073cbce815aac6ba19f
