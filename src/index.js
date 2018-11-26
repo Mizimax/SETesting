@@ -51,6 +51,7 @@ function register(e) {
             Nickname: nickname,
             Role: "User"
           });
+        clearRegis();
       })
       .catch(function(error) {
         var errorCode = error.code;
