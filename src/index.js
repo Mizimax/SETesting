@@ -34,3 +34,20 @@ function register(e) {
     console.log("Password must be equal");
   }
 }
+function search(e){
+  var name = document.getElementById("searchName").value;
+  db.collection('UserInfo').where('Nickname', '==', 'Jardy').get().then(function(querySnapshot) {
+    if (querySnapshot.size > 0) {
+      // Contents of first document
+      console.log(querySnapshot.docs[0].data());
+    } else {
+      console.log("No such document!");
+    }
+  })
+  .catch(function(error) {
+    console.log("Error getting document: ", error);
+  });
+}
+function submitTeam(e){
+  
+}
