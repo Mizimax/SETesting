@@ -34,7 +34,6 @@ function register(e) {
     console.log("Password must be equal");
   }
 }
-<<<<<<< HEAD
 function search(e){
   var name = document.getElementById("searchName").value;
   db.collection('UserInfo').where('Nickname', '==', 'Jardy').get().then(function(querySnapshot) {
@@ -52,5 +51,3 @@ function search(e){
 function submitTeam(e){
   
 }
-=======
->>>>>>> d511d5645010f9dab0585d14cb7b76bc0df49b41
