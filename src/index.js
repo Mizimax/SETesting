@@ -101,3 +101,20 @@ function logout() {
       // An error happened.
     });
 }
+
+function loadCompetition() {
+  db.collection("Competition")
+    .doc("A1qDn5cGZMsT3upqRazI")
+    .get()
+    .then(comp => {
+      var compData = comp.data();
+      $("#compName").text(compData.CompetitionName);
+      $(".compDetail").text(compData.CompetitionDetail);
+      $(".compType .content").text(compData.CompetitionType);
+      $(".compGame .content").text(compData.GameName);
+      $(".compOrganizer .content").text(compData.Organizer);
+      $(".compFee .content").text(compData.Fee);
+      $(".compPrize .content").text(compData.Prize);
+      $(".compPic").attr("src", compData.Picture);
+    });
+}

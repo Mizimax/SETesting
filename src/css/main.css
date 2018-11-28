@@ -1,3 +1,7 @@
+body {
+  font-family: "Kanit", sans-serif;
+}
+
 .shadow {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
@@ -7,4 +11,42 @@
   width: 100%;
   top: 0;
   left: 0;
+}
+
+.footer {
+  padding: 15px;
+  /* background-color: #555; */
+  color: 12px;
+  color: #888;
+}
+
+.comp {
+  padding-bottom: 20px;
+}
+
+#compName {
+  /* font-size: 17px; */
+  font-weight: bold;
+}
+
+.compPic {
+  margin-top: 20px;
+  width: 100%;
+  height: 300px;
+}
+
+.compDetails div {
+  margin-bottom: 10px;
+}
+
+.compFee .content {
+  color: red;
+}
+
+.compPrize .content {
+  color: green;
+}
+
+.nav-link.disable {
+  opacity: 0.3;
 }

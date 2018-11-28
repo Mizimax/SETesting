@@ -10,6 +10,10 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link
+      href="https://fonts.googleapis.com/css?family=Kanit:200,400"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/main.css" />
     <title>G-Tour</title>
     <style>
@@ -340,7 +344,7 @@
       class="navbar navbar-expand-lg navbar navbar-light bg-light navbar-second shadow"
     >
       <div class="container">
-        <a class="navbar-brand" href="#">Competition name</a>
+        <a class="navbar-brand" id="compName" href="#">Competition name</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -359,18 +363,54 @@
               <a
                 id="cTeamShow"
                 class="nav-link"
-                style="cursor: pointer; background: darkcyan; color: white; border-radius: 10px; padding: 7px 15px"
+                style="cursor: pointer; background: #0069d9; color: white; border-radius: 10px; padding: 7px 15px; margin-right: 10px"
                 data-toggle="modal"
                 data-target="#createTeamModal"
                 >Create Team</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                id="joinComp"
+                class="nav-link disable"
+                style="cursor: pointer; background: #B71C1C; color: white; border-radius: 10px; padding: 7px 15px"
+                data-toggle="modal"
+                data-target="#joinTeam"
+                >Apply</a
               >
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <div class="comp shadow">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 compDetails">
+            <h4 style="margin: 20px 0">รายละเอียด</h4>
+            <div class="compDetail"></div>
+            <div class="compType">ประเภท : <span class="content"></span></div>
+            <div class="compGame">เกม : <span class="content"></span></div>
+            <div class="compOrganizer">
+              ผู้จัดแข่ง : <span class="content"></span>
+            </div>
+            <div class="compFee">
+              ค่าจัดแข่ง : <span class="content"></span> บาท
+            </div>
+            <div class="compPrize">
+              เงินรางวัล : <span class="content"></span> บาท
+            </div>
+          </div>
+          <div class="col-sm-6"><img src="" class="compPic" /></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer" align="center">
+      <b style="font-size: 17px">G-Tour</b><br />
+      <span style="font-size: 13px">จัดแข่งดี ไม่มีความปลอดภัย</span>
+    </div>
     <script src="https://www.gstatic.com/firebasejs/5.5.9/firebase.js"></script>
     <script>
       // Initialize Firebase
@@ -408,18 +448,17 @@
           register();
           return false;
         });
-      });
-    </script>
-
-    <script>
-      $(document).ready(function() {
         $("#loginForm").submit(function(e) {
           e.preventDefault();
           login();
           return false;
         });
-      });
 
+        loadCompetition();
+      });
+    </script>
+
+    <script>
       var targetTop = $(".navbar-second").offset().top;
       $(document).scroll(function(e) {
         var scrollTop = $(document).scrollTop();
