@@ -56,21 +56,35 @@ function showScoretoUpdate() {
             return Promise.all(promise);
           })
         ).then(teams => {
-          htmlText += `<form method="post" id="updateScoreForm">`;
+          htmlText += `<br><br><form method="post" id="updateScoreForm">`;
           teams.forEach(team => {
-            htmlText += `<div id="${tempMatchID}">`;
-            team.forEach(teamData => {
-              htmlText += `
-                ${teamData.TeamName}
-                    <input type="text" name="${teamData.TeamID.id}" id="${
-                teamData.TeamID.id
-              }" value="${teamData.Score}">
+            htmlText += `<div id="${tempMatchID}" style="position:relative;width:150px">`;
+            team.forEach((teamData, index) => {
+              if (index % 2 == 0)
+                htmlText += `
+                <div style="position:absolute;right:110%;text-align:right;width:200px"> ${
+                  teamData.TeamName
+                }</div>
+                    <input type="text" style="width: 50px;margin-right:7px;text-align:center" name="${
+                      teamData.TeamID.id
+                    }" id="${teamData.TeamID.id}" value="${teamData.Score}">
+                    VS
+                `;
+              else
+                htmlText += `
+                 
+                    <input type="text" style="width: 50px;margin-left:10px;text-align:center" name="${
+                      teamData.TeamID.id
+                    }" id="${teamData.TeamID.id}" value="${teamData.Score}">
+                   <div style="position:absolute;left: 110%; width: 200px; top:0;text-align:left;"> ${
+                     teamData.TeamName
+                   }</div>
                     
                 `;
             });
             htmlText += `</div>`;
           });
-          htmlText += `<button type="submit" class="btn btn-primary btn-xs">Save</button></form>`;
+          htmlText += `<br><br><button type="submit" class="btn btn-primary btn-xs">Save</button></form>`;
 
           $("#scoreBoard").html(htmlText);
 

@@ -50,88 +50,90 @@ firebase.auth().onAuthStateChanged(function(user) {
         // });
         // console.log(currentUser);
         // console.log(
-        db.collection("Team")
-          .where("UserID", "array-contains", userRef)
-          .onSnapshot(querySnapshot => {
-            console.log(querySnapshot);
-            querySnapshot.forEach(doc => {
-              if (doc) {
-                // already team
-                $("#cTeamShow").hide();
-                $("#eTeamShow").show();
-                $("#joinComp").removeClass("disable");
+        var teamReff = db
+          .collection("Team")
+          .where("UserID", "array-contains", userRef);
+        teamReff.onSnapshot(querySnapshot => {
+          console.log(querySnapshot);
+          querySnapshot.forEach(doc => {
+            if (doc) {
+              // already team
+              $("#cTeamShow").hide();
+              $("#eTeamShow").show();
+              $("#joinComp").removeClass("disable");
 
-                window.team = doc.data();
-                window.team.TeamID = doc.id;
-                $("#teamName2").val(window.team.TeamName);
-                window.team.UserID.forEach((user, index) => {
-                  promiseTeam.push(
-                    user.get().then(userData => {
-                      console.log(userData.data());
-                      window.team.UserID[index][
-                        "Nickname"
-                      ] = userData.data().Nickname;
-                      window.team.UserID[index]["UserID"] = userData.id;
+              window.teamRef = doc.ref;
+              window.team = doc.data();
+              window.team.TeamID = doc.id;
+              $("#teamName2").val(window.team.TeamName);
+              window.team.UserID.forEach((user, index) => {
+                promiseTeam.push(
+                  user.get().then(userData => {
+                    console.log(userData.data());
+                    window.team.UserID[index][
+                      "Nickname"
+                    ] = userData.data().Nickname;
+                    window.team.UserID[index]["UserID"] = userData.id;
+                  })
+                );
+              });
+              Promise.all(promiseTeam).then(team => {
+                db.collection("Competition")
+                  .where("Teams", "array-contains", window.team)
+                  .onSnapshot(snap => {
+                    if (doc) {
+                      snap.forEach(doc => {
+                        $("#joinComp").addClass("disable");
+                        $("#joinComp").text("Applyed");
+                      });
+                    } else {
+                      $("#joinComp").removeClass("disable");
+                      $("#joinComp").text("Apply");
+                    }
+                  });
+                window.currentSearch = $("#userAllCreate2").children();
+                var result = [];
+                window.team.UserID.forEach((ele, index) => {
+                  // result.concat(
+                  result.push(
+                    currentSearch.filter(child => {
+                      // console.log(eles[child]);
+
+                      var childd = $(currentSearch[child]).children(":first");
+                      return (
+                        childd
+                          .last()
+                          .text()
+                          .trim()
+                          .toLowerCase() ==
+                        window.team.UserID[index].Nickname.toLowerCase()
+                      );
                     })
                   );
-                });
-                Promise.all(promiseTeam).then(team => {
-                  db.collection("Competition")
-                    .where("Teams", "array-contains", window.team)
-                    .onSnapshot(snap => {
-                      if (doc) {
-                        snap.forEach(doc => {
-                          $("#joinComp").addClass("disable");
-                          $("#joinComp").text("Applyed");
-                        });
-                      } else {
-                        $("#joinComp").removeClass("disable");
-                        $("#joinComp").text("Apply");
-                      }
-                    });
-                  window.currentSearch = $("#userAllCreate2").children();
-                  var result = [];
-                  window.team.UserID.forEach((ele, index) => {
-                    // result.concat(
-                    result.push(
-                      currentSearch.filter(child => {
-                        // console.log(eles[child]);
 
-                        var childd = $(currentSearch[child]).children(":first");
-                        return (
-                          childd
-                            .last()
-                            .text()
-                            .trim()
-                            .toLowerCase() ==
-                          window.team.UserID[index].Nickname.toLowerCase()
-                        );
-                      })
+                  // );
+                });
+                result.forEach((ele, index) => {
+                  console.log(ele);
+                  if (index != ele.length - 1)
+                    addTeamMember(
+                      $(ele)
+                        .children()
+                        .last(),
+                      "#userAllCreate2"
                     );
-
-                    // );
-                  });
-                  result.forEach((ele, index) => {
-                    console.log(ele);
-                    if (index != ele.length - 1)
-                      addTeamMember(
-                        $(ele)
-                          .children()
-                          .last(),
-                        "#userAllCreate2"
-                      );
-                  });
                 });
-              } else {
-                // no team
-                $("#cTeamShow").show();
-                $("#eTeamShow").hide();
-                $("#joinComp").addClass("disable");
-              }
-            });
-            // });
-            // );
+              });
+            } else {
+              // no team
+              $("#cTeamShow").show();
+              $("#eTeamShow").hide();
+              $("#joinComp").addClass("disable");
+            }
           });
+          // });
+          // );
+        });
       });
     }
   } else {
@@ -170,7 +172,7 @@ function register(e) {
       .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;
-        console.log(errorMessage);
+        alert(errorMessage);
         // ...
       });
   } else {
@@ -355,6 +357,7 @@ function createTeam(formData, target, action) {
 }
 
 function joinComp() {
+  console.log(window.teamRef);
   db.collection("Competition")
     .doc("A1qDn5cGZMsT3upqRazI")
     .get()
