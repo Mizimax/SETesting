@@ -258,13 +258,12 @@
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h4>Create Team</h4>
             <button type="button" class="close" data-dismiss="modal">
               &times;
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form method="post" id="searchForm">
               <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">
@@ -275,14 +274,20 @@
                         type="text"
                         class="form-control input-sm"
                         placeholder="User Name"
-                        id="name"
-                        name="name"
+                        id="searchName"
+                        name="searchName"
                       />
                     </div>
                   </div>
                 </div>
-                <div class="col-lg-4"></div>
+                <div class="col-lg-4">
+                  <button type="submit" class="btn btn-primary btn-xs">
+                    Search
+                  </button>
+                </div>
               </div>
+            </form>
+            <form method="post" id="submitTeamForm">
               <div class="row">
                 <div class="col-lg-4"></div>
                 <div class="col-lg-4">empty slot</div>
@@ -311,7 +316,7 @@
               <div class="row"></div>
               <div class="text-center">
                 <button type="submit" class="btn btn-primary btn-xs">
-                  Create
+                  Search
                 </button>
                 <button
                   type="button"
@@ -412,6 +417,9 @@
         messagingSenderId: "992644802636"
       };
       firebase.initializeApp(config);
+      const db = firebase.firestore();
+      const settings = { /* your settings... */ timestampsInSnapshots: true };
+      db.settings(settings);
     </script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -444,6 +452,20 @@
         });
 
         loadCompetition();
+      });
+      $(document).ready(function() {
+        $("#searchForm").submit(function(e) {
+          e.preventDefault();
+          search();
+          return false;
+        });
+      });
+      $(document).ready(function() {
+        $("#submitTeamForm").submit(function(e) {
+          e.preventDefault();
+          submitTeam();
+          return false;
+        });
       });
     </script>
 
