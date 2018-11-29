@@ -50,3 +50,7 @@ body {
 .nav-link.disable {
   opacity: 0.3;
 }
+
+.hide {
+  display: none;
+}

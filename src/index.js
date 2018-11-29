@@ -18,6 +18,63 @@ firebase.auth().onAuthStateChanged(function(user) {
           document.getElementById(
             "userNameShow"
           ).innerHTML = doc.data().Nickname;
+
+          // db.collection("Competition")
+          //   .doc("A1qDn5cGZMsT3upqRazI")
+          //   .get()
+          //   .then(comp => {
+          //     var compData = comp.data();
+          //     var teamPromises = [];
+          //     compData.Teams.forEach(team => {
+          //       console.log(team);
+          //       teamPromises.push(team.get().then(tm => tm));
+          //     });
+          //     Promise.all(teamPromises).then(team => {
+          //       console.log(team.collection);
+
+          // var userPromises = [];
+          // team.forEach(tm => {
+          //   console.log(tm);
+          //   userPromises.push(
+          //     tm
+          //       .where("UserID", "array-contains", currentUser)
+          //       .get()
+          //       .then(userTeam => {
+          //         console.log(userTeam.data());
+          //       })
+          //   );
+          // });
+          //   });
+          // });
+          // console.log(currentUser);
+          // console.log(
+          var userRef = db.collection("UserInfo").doc(currentUser.uid);
+          db.collection("Team")
+            .where("UserID", "array-contains", userRef)
+            .onSnapshot(querySnapshot => {
+              querySnapshot.forEach(doc => {
+                if (doc) {
+                  // already team
+                  $("#cTeamShow").text("Edit Team");
+                  $("#joinComp").removeClass("disable");
+
+                  window.team = doc.data();
+                  window.team.UserID.forEach((user, index) => {
+                    user.get().then(userData => {
+                      window.team.UserID[index][
+                        "Nickname"
+                      ] = userData.data().Nickname;
+                      window.team.UserID[index]["UserID"] = userData.id;
+                    });
+                  });
+                } else {
+                  // no team
+                  $("#cTeamShow").text("Create Team");
+                  $("#joinComp").addClass("disable");
+                }
+              });
+            });
+          // );
         });
     }
   } else {
