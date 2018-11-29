@@ -54,3 +54,9 @@ body {
 .hide {
   display: none;
 }
+
+#userAllCreate,
+#userAllCreate2 {
+  max-height: 200px;
+  overflow-y: scroll;
+}
